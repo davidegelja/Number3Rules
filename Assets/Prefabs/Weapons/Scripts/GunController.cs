@@ -8,6 +8,10 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private SpriteRenderer playerSprite;
     private Vector3 gunPosition;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform firePoint;
 
     void Start()
     {
@@ -20,7 +24,17 @@ public class GunController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        if (angle > 90f || angle < -90f)
+        AdjustGunAngle(angle);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot(direction);
+        }
+    }
+
+    public void AdjustGunAngle(float gunAngle)
+    {
+        if (gunAngle > 90f || gunAngle < -90f)
         {
             gunSprite.flipY = true;
             gunSprite.sortingOrder = playerSprite.sortingOrder - 1;
@@ -30,5 +44,10 @@ public class GunController : MonoBehaviour
             gunSprite.flipY = false;
             gunSprite.sortingOrder = playerSprite.sortingOrder + 1;
         }
+    }
+        void Shoot(Vector3 direction)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
     }
 }

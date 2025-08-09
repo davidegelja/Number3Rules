@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4646103550641348170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1689066935081210935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.055, y: 0.131, z: 0}
+  m_LocalPosition: {x: -0.265, y: 0.172, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4884866064851036101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,9 +75,10 @@ GameObject:
   - component: {fileID: 7899310818069850715}
   - component: {fileID: 2282377531364017497}
   - component: {fileID: 2871947733227827910}
-  - component: {fileID: 2462953648189664167}
   - component: {fileID: 4752087288725602683}
-  m_Layer: 0
+  - component: {fileID: 92810972339681788}
+  - component: {fileID: 5872743260879311979}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,8 +206,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2462953648189664167
-BoxCollider2D:
+--- !u!114 &4752087288725602683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402606102434145603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2cd80993cec324e8aaa272f3c5082f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 4884866064851036101}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  crosshair: {fileID: 0}
+  groundCheckRadius: 0.5
+  moveSpeed: 2
+  jumpForce: 10
+--- !u!114 &92810972339681788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402606102434145603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6138eca81f28abb43bc10f802c43d758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+--- !u!70 &5872743260879311979
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -239,38 +273,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00016880035, y: 0.03113611}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1.28, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.31459916, y: 0.73539054}
-  m_EdgeRadius: 0
---- !u!114 &4752087288725602683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8402606102434145603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca2cd80993cec324e8aaa272f3c5082f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 4884866064851036101}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  crosshair: {fileID: 0}
-  groundCheckRadius: 0.01
-  moveSpeed: 2
-  jumpForce: 10
+  m_Offset: {x: 0.009759322, y: 0.044298887}
+  m_Size: {x: 0.2898542, y: 0.723768}
+  m_Direction: 0
 --- !u!1001 &5391597967051131988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -283,10 +288,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 1144617592721144350, guid: 25c0269a2115ab74c940888e9bcd8627, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1831955611750350129, guid: 25c0269a2115ab74c940888e9bcd8627, type: 3}
       propertyPath: playerSprite
       value: 
       objectReference: {fileID: 7899310818069850715}
+    - target: {fileID: 2140457837392022389, guid: 25c0269a2115ab74c940888e9bcd8627, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5154647870518955528, guid: 25c0269a2115ab74c940888e9bcd8627, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.34595

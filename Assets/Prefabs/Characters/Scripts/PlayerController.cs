@@ -4,19 +4,20 @@ public class PlayerController : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rb;
-    private bool isGrounded;
     private SpriteRenderer spriteRenderer;
-
+    private bool isGrounded;
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private float groundCheckRadius = 0.2f;
     [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
     private GameObject crosshair;
-    public float groundCheckRadius = 0.2f;
-
-    public float moveSpeed = 2f;
-    public float jumpForce = 6f;
+    [SerializeField]
+    private float moveSpeed = 2f;
+    [SerializeField]
+    private float jumpForce = 6f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,16 +41,6 @@ public class PlayerController : MonoBehaviour
         {
             this.FlipPlayerRight(true);
         }
-
-        if (moveInput > 0.01f)
-        {
-            FlipPlayerRight(true);
-        }
-        else if (moveInput < -0.01f)
-        {
-            FlipPlayerRight(false);
-        }
-
         // Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
@@ -64,7 +55,6 @@ public class PlayerController : MonoBehaviour
     }
     public void FlipPlayerRight(bool flipRight)
     {
-        spriteRenderer.flipX = flipRight; 
-        // TODO weapon flip
+        spriteRenderer.flipX = flipRight;
     }
 }

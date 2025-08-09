@@ -440,6 +440,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1085203341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721729810398460614, guid: 60ee9bd9dfd13f14fbaddad07769c40b, type: 3}
+  m_PrefabInstance: {fileID: 8829506284427597128}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1662007371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1121556342194409223, guid: 93ef3dec205e3174f8724f012c8c29d7, type: 3}
@@ -525,6 +530,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4752087288725602683, guid: e8d9b0e36dd1af045a43f92539cfdd50, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 1085203341}
+    - target: {fileID: 5872743260879311979, guid: e8d9b0e36dd1af045a43f92539cfdd50, type: 3}
+      propertyPath: m_Size.y
+      value: 0.68304837
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872743260879311979, guid: e8d9b0e36dd1af045a43f92539cfdd50, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0646587
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034441028594086245, guid: e8d9b0e36dd1af045a43f92539cfdd50, type: 3}
+      propertyPath: crosshair
+      value: 
+      objectReference: {fileID: 525215719}
     - target: {fileID: 8351257403606830382, guid: e8d9b0e36dd1af045a43f92539cfdd50, type: 3}
       propertyPath: crosshair
       value: 
