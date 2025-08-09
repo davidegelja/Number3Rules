@@ -2,25 +2,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private bool isGrounded;
+    private CharacterController2D controller;
     [SerializeField]
-    private Transform groundCheck;
+    private Transform target;
     [SerializeField]
-    private float groundCheckRadius = 0.2f;
-    [SerializeField]
-    private LayerMask groundLayer;
+    private float followRange = 15f;
     void Start()
     {
-
+        controller = GetComponent<CharacterController2D>();
     }
-
     void Update()
     {
+        float distance = target.position.x - transform.position.x;
 
-    }
-    void FixedUpdate()
-    {
-        // Ground check
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (Mathf.Abs(distance) < followRange)
+        {
+            float moveDir = Mathf.Sign(distance);
+            controller.SetMoveInput(moveDir);
+        }
+        else
+        {
+            controller.SetMoveInput(0);
+        }
     }
 }

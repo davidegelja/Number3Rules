@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class CharacterController2D : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rb;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 2f;
     [SerializeField]
     private float jumpForce = 6f;
+    private float moveInput;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,32 +29,33 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Move left/right
-        float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-
         animator.SetBool("isWalking", moveInput != 0);
-
-        if (transform.position.x > crosshair.transform.position.x)
+        if (crosshair != null)
         {
-            this.FlipPlayerRight(false);
-        }
-        else
-        {
-            this.FlipPlayerRight(true);
-        }
-        // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            if (transform.position.x > crosshair.transform.position.x)
+                FlipPlayerRight(false);
+            else
+                FlipPlayerRight(true);
         }
     }
 
     void FixedUpdate()
     {
-        // Ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
+
+    public void SetMoveInput(float input)
+    {
+        moveInput = input;
+    }
+
+    public void Jump()
+    {
+        if (isGrounded)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    }
+
     public void FlipPlayerRight(bool flipRight)
     {
         spriteRenderer.flipX = flipRight;
