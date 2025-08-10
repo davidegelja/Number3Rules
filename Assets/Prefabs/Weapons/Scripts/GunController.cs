@@ -74,6 +74,10 @@ public class GunController : MonoBehaviour
     }
     void Shoot(Vector3 direction)
     {
+        if (bulletPrefab == null || firePoint == null)
+        {
+            return;
+        }
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().SetDirection(direction);
         // TODO add some shooting animation/muzzle flash, sound
