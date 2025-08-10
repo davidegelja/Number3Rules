@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 9112546914808964581}
   - component: {fileID: 7272401654139843047}
   - component: {fileID: 7786999923271874690}
-  m_Layer: 9
-  m_Name: PlayerBullet
+  m_Layer: 10
+  m_Name: EnemyBullt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,6 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1116e59aa392d0643b97fa29d8248ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
   damage: 20
   lifetime: 4

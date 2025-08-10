@@ -56,7 +56,7 @@ public class CharacterController2D : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
     }
 
-    public void FlipPlayerRight(bool flipRight)
+    private void FlipPlayerRight(bool flipRight)
     {
         spriteRenderer.flipX = flipRight;
     }

@@ -16,11 +16,13 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
     }
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
