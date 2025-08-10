@@ -6,11 +6,22 @@ public class GunController : MonoBehaviour
     private Transform crosshair;
     private SpriteRenderer gunSprite;
     [SerializeField]
-    private SpriteRenderer playerSprite;
+    private SpriteRenderer ownerSprite;
     private Vector3 gunPosition;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform firePoint;
+    [SerializeField]
+    private float RoundsPerMinute = 600f;
+    private float shootInput;
+    private float fireCooldown;
+    private float cooldownTimer;
 
     void Start()
     {
+        fireCooldown = 60f / RoundsPerMinute;
+        cooldownTimer = 0f;
         gunSprite = GetComponent<SpriteRenderer>();
         gunPosition = transform.position;
     }
@@ -20,15 +31,39 @@ public class GunController : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        if (angle > 90f || angle < -90f)
+        AdjustGunAngle(angle);
+
+        if (cooldownTimer > 0f)
         {
-            gunSprite.flipY = true;
-            gunSprite.sortingOrder = playerSprite.sortingOrder - 1;
+        cooldownTimer -= Time.deltaTime;
+        }
+        if (shootInput > 0 && cooldownTimer <= 0f)
+        {
+            Shoot(direction);
+            cooldownTimer = fireCooldown;
+        }
+    }
+    public void SetShootInput(float input)
+    {
+        shootInput = input;
+    }
+    private void AdjustGunAngle(float gunAngle)
+    {
+        if (gunAngle > 90f || gunAngle < -90f)
+        {
+            transform.localRotation = Quaternion.Euler(180f, 0f, -gunAngle);
+            gunSprite.sortingOrder = ownerSprite.sortingOrder - 1;
         }
         else
         {
-            gunSprite.flipY = false;
-            gunSprite.sortingOrder = playerSprite.sortingOrder + 1;
+            transform.localRotation = Quaternion.Euler(0f, 0f, gunAngle);
+            gunSprite.sortingOrder = ownerSprite.sortingOrder + 1;
         }
+    }
+    void Shoot(Vector3 direction)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
+        // TODO add some shooting animation/muzzle flash, sound
     }
 }
