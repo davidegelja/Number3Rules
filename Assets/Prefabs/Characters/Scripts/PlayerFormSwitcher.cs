@@ -21,9 +21,9 @@ public class PlayerFormSwitcher : MonoBehaviour
         }
     }
 
-    void SwitchForm(bool nextForm)
+    private void SwitchForm(bool nextForm)
     {
-        int nextIndex = nextForm ? 1: -1;
+        int nextIndex = nextForm ? 1 : -1;
         if (currentFormIndex + nextIndex < 0 || currentFormIndex + nextIndex >= forms.Length)
         {
             return;
@@ -40,8 +40,7 @@ public class PlayerFormSwitcher : MonoBehaviour
 
         forms[currentFormIndex].SetActive(true);
     }
-
-    void ActivateForm(int index)
+    private void ActivateForm(int index)
     {
         foreach (GameObject form in forms)
         {
@@ -49,5 +48,24 @@ public class PlayerFormSwitcher : MonoBehaviour
         }
 
         forms[index].SetActive(true);
+    }
+    public void LevelUp()
+    {
+        if (currentFormIndex < forms.Length - 1)
+        {
+            SwitchForm(true);
+        }
+        HealAllForms();
+    }
+    private void HealAllForms()
+    {
+        foreach (GameObject form in forms)
+        {
+            Health health = form.GetComponent<Health>();
+            if (health != null)
+            {
+                health.Heal(health.GetMaxHealth());
+            }
+        }
     }
 }

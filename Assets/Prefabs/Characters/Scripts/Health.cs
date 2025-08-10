@@ -67,4 +67,20 @@ public class Health : MonoBehaviour
         }
         Destroy(gameObject, 1f);
     }
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if (healthBar != null)
+        {
+            healthBar.SetHealthPercent(currentHealth / maxHealth);
+        }
+    }
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
 }
