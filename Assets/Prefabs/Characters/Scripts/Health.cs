@@ -3,18 +3,26 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField]
-    private int maxHealth = 100;
-    private int currentHealth;
+    private float maxHealth = 100f;
+    private float currentHealth;
+    private HealthBar healthBar;
+    private GameObject gun;
+    private GameObject healthBarObject;
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar = GetComponentInChildren<HealthBar>();
+        gun = GetComponentInChildren<GunController>()?.gameObject;
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log(gameObject.name + " took " + damage + " damage! HP: " + currentHealth);
+        if (healthBar != null)
+        {
+            healthBar.SetHealthPercent(currentHealth / maxHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -24,7 +32,14 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(gameObject.name + " died!");
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(false);
+        }
+        if (gun != null)
+        {
+            gun.SetActive(false);
+        }
         Enemy enemy = GetComponent<Enemy>();
         if (enemy != null)
         {
