@@ -270,10 +270,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34acad7901f3d1c459716f1705f0c41b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  followRange: 15
   attackInterval: 1.5
   shootRange: 10
+  patrolPoints: []
+  chaseRange: 7
+  patrolSpeed: 0.5
+  chaseSpeed: 1
+  target: {fileID: 0}
+  nextPatrolPointDistance: 0.2
+  verticalDifferenceToTriggerJump: 0.4
 --- !u!114 &1840315918950361779
 MonoBehaviour:
   m_ObjectHideFlags: 0

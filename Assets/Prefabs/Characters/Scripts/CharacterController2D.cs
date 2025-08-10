@@ -34,9 +34,31 @@ public class CharacterController2D : MonoBehaviour
         if (crosshair != null)
         {
             if (transform.position.x > crosshair.transform.position.x)
-                FlipPlayerRight(false);
+            {
+                FlipCharacterRight(false);
+            }
             else
-                FlipPlayerRight(true);
+            {
+                FlipCharacterRight(true);
+            }
+        }
+        else
+        {
+            GunController gunController = GetComponentInChildren<GunController>();
+            if (gunController == null)
+            {
+                return;
+            }
+            if (moveInput < 0)
+            {
+                FlipCharacterRight(false);
+                gunController.AdjustGunAngle(180f);
+            }
+            else if (moveInput > 0)
+            {
+                FlipCharacterRight(true);
+                gunController.AdjustGunAngle(0f);
+            }
         }
     }
 
@@ -56,8 +78,18 @@ public class CharacterController2D : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
     }
 
-    private void FlipPlayerRight(bool flipRight)
+    private void FlipCharacterRight(bool flipRight)
     {
         spriteRenderer.flipX = flipRight;
+    }
+
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
+    public void SetCrosshair(Transform newCrosshair)
+    {
+        crosshair = newCrosshair.gameObject;
     }
 }

@@ -27,6 +27,10 @@ public class GunController : MonoBehaviour
     }
     void Update()
     {
+        if (crosshair == null)
+        {
+            return;
+        }
         Vector3 direction = crosshair.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -47,7 +51,15 @@ public class GunController : MonoBehaviour
     {
         shootInput = input;
     }
-    private void AdjustGunAngle(float gunAngle)
+    public void SetCrosshair(Transform newCrosshair)
+    {
+        if (newCrosshair == null)
+        {
+            return;
+        }
+        crosshair = newCrosshair;
+    }
+    public void AdjustGunAngle(float gunAngle)
     {
         if (gunAngle > 90f || gunAngle < -90f)
         {
